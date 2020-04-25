@@ -1,0 +1,143 @@
+$$
+$$
+$$
+$$ Подпрограмма считывания/установки параметров операции
+$$
+$$
+$$
+$$ Copyright (C) 2000 by Unigraphics Komsomolsk-on-Amur
+$$ All rights reserved
+
+$$ Data Declarations and Definitions
+ENTITY/tagOper
+NUMBER/opType
+NUMBER/fl_change
+
+    gripsw / declrv
+    STRING/noper(32)
+    NUMBER/cdir,gen
+    number / usresp
+
+$$ Register and initialize the argument list with UG/Open API.
+    ufargs / noper, cdir , gen , usresp , IFERR, err:
+$$
+$$ UG/Open API calling GRIP program
+$$
+$$ Input from UG/Open API
+$$ noper = operation name
+$$ cdir =( 1 = &CLIMB   2 = &CONVEN )
+$$ gen  =( 1 = &YES     2 = &NO     )
+$$
+$$ Output to UG/Open API
+$$   usresp : user response
+
+$$ Enter Appropriate Module
+&MODULE=&MACH
+
+$$ key in name of an existing operation
+$$TEXT/'RETRIEVE OPERATION*ENTER NAME',noper,IOP,DEFLT
+$$JUMP/fini:,fini:, , , , IOP
+$$$cdir=2
+$$$gen=2
+ 
+$$ print/'операция='+noper + ',' + ISTRL(cdir) + ',' + ISTRL(gen)
+
+ IFTHEN/ 1 == INTF(cdir)
+    cdir = &CLIMB
+ ELSEIF/ 2 == INTF(cdir)
+    cdir = &CONVEN
+ ENDIF
+
+$$ for debug.$$
+$$ Init operation cycling.$$
+$$$INEXTN/&OPER,IFERR,err:
+$$$LOOP:
+$$$ noper = NEXTN/IFEND,err: $$ Get name of next operation.$$
+
+  fl_change=0
+  $$ Retrieve operation
+  OPER/RETRVE,noper,IFERR,err:
+
+  $$ Get tag of operation.$$
+  tagOper = &OPRNAM(noper,IFERR,err:)
+  $$ Get operation type.$$
+  opType = &OPTYP(noper)
+
+$$$  print/'операция='+noper+' type='+ISTRL(opType)
+$$$  print/'       DIRMET='+ISTRL(&DIRMET)
+$$$  print/'       CUTDIR='+ISTRL(&CUTDIR)
+
+$$$JUMP/ LOOP: $$ for debug.$$
+
+$$ 110 - Pocket
+$$ 210 - Fixed Axis Surface Contouring
+$$ 211 - Variable Axis Surface Contouring
+$$ 220 - Sequential Milling
+$$ 240 - Zig-Zag Surface
+$$ 260 - Cavity Milling
+$$ 261 - Face Miling
+$$ 263 - Z-Level Milling
+
+  IFTHEN/(opType == 110)
+    IF/NOT(INTF(cdir)==&CUTDIR),JUMP/chg:
+  ENDIF
+
+  IFTHEN/(opType == 240)
+    jump/fini:
+  ENDIF
+
+  IFTHEN/(opType == 260)
+    IF/NOT(INTF(cdir)==&CUTDIR),JUMP/chg:
+  ENDIF
+
+  IFTHEN/(opType == 261)
+    jump/fini:
+  ENDIF
+
+  IFTHEN/(opType == 263)
+    jump/fini:
+  ENDIF
+
+  IFTHEN/(opType == 265)
+    jump/fini:
+  ENDIF
+
+dogen:
+  usresp=fl_change
+  $$ - если провели изменение
+  IF/(usresp==0),jump/fini:
+
+  $$Generate toolpath.
+  IFTHEN/ gen == 1
+     &GENPTH=&YES
+  ELSE
+     &GENPTH=&NO
+  ENDIF
+
+  OPER/SAVE
+  jump/fini:
+
+$$ подпрограммы
+
+$$ 1. изменение
+chg:
+
+$$  &CUTDIR = INTF(cdir)
+ IFTHEN/ 1 == INTF(cdir)
+    &CUTDIR = &CLIMB
+ ELSEIF/ 2 == INTF(cdir)
+    &CUTDIR = &CONVEN
+ ENDIF
+ fl_change=1
+ jump/dogen:
+
+$$ 2. Inform user of any errors
+err:
+    usresp =-3
+    print/'!Error! - операция='+noper
+
+$$ Return control to the UG/Open API program.
+$$ Done
+fini:
+HALT
+$$------------------------------------------

@@ -1,0 +1,41 @@
+
+$$ 110 - Pocket
+$$ 210 - Fixed Axis Surface Contouring
+$$ 211 - Variable Axis Surface Contouring
+$$ 220 - Sequential Milling
+$$ 240 - Zig-Zag Surface
+$$ 260 - Cavity Milling
+$$ 261 - Face Miling
+$$ 263 - Z-Level Milling
+
+
+&CUTDIR - Cut Direction
+
+
+This GPA is valid for Follow Periphery and Profile Cut Types only.
+Description:
+Cut Direction allows you to define a cut direction when the Direction Method GPA (&DIRMET) is set to &CLMCON. You can specify Climb or Conventional directions which cause the cutter to process the pocket either in the boundary direction or inverse based on the spindle direction (CLW or CCLW as defined in the TOOL statement.) Refer to the figure below. The Spindle direction in the example is assumed to be CLW.
+
+ 1 = &CLIMB   
+ 2 = &CONVEN
+
+
+$$ This GPA is valid for Follow Periphery and Profile Cut Types only.
+$$ Cut Direction allows you to define a cut direction when the
+$$  Direction Method GPA (&DIRMET) is set to &CLMCON
+
+$$ &DIRMET - Direction Method - Planar Milling and Surface Contouring
+$$          (Boundary Method)
+$$ Direction Method allows you to specify the method the system uses
+$$ to define the step direction. The direction, either forward or inverse,
+$$ can be based on the tool side, the material side, or the application of
+$$ Climb or Conventional milling. Even though the resulting step
+$$ direction from all three methods is either forward or inverse,
+$$ the optional methods allow you to use the terminology you are most familiar
+$$ with.This GPA is valid for Follow Periphery and Profile Cut Types only.
+$$
+$$ Specifies the step direction is defined
+$$ 1 = &TOOLSD - as to the left or right of the tool.
+$$ 2 = &MATLSD - as to the left or right of the material.
+$$ 3 = &CLMCON - based on the application of Climb or Conventional mill techn.
+$$

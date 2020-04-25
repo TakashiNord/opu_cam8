@@ -1,0 +1,232 @@
+
+typedef enum
+{
+    UF_PARAM_engret_auto_type_linear   = 0,
+    UF_PARAM_engret_auto_type_circular = 1
+
+} UF_PARAM_engret_auto_type_t;
+
+
+/* UF_PARAM_ENGRET_AUTO_TYPE
+ *
+ *   Description:
+ *      Parmeter denotes the type of automatic
+ *      engages and retracts currently selected.
+ *
+ *   Type: UF_PARAM_type_int
+ *
+ *   Name: Engage Retract Auto Type
+ *  Variable Name: <prefix>_engage_retract_auto_type
+ *
+ *   Possible Values: 0 - linear
+ *                    1 - circular
+ *
+ * 
+ */
+#define UF_PARAM_ENGRET_AUTO_TYPE   214  /* UF_PARAM_type_int */
+
+
+/* UF_PARAM_ENGRET_AUTO_OVERLAP
+ *
+ *   Description:
+ *      Parameter is the overlap distance used by
+ *      automatic engages and automatic retracts.
+ *      (It is used only when a closed path is cut.)
+ *
+ *   Type: UF_PARAM_type_double_length
+ *
+ *   Name: Engage Retract Auto Overlap
+ *  Variable Name: <prefix>_engage_retract_auto_overlap
+ *
+ *   Possible Values: non-negative UF_PARAM_type_double_length
+ *
+ * 
+ */
+#define UF_PARAM_ENGRET_AUTO_OVERLAP   215  /* UF_PARAM_type_double_length */
+
+
+/* UF_PARAM_ENGRET_AUTO_RADIUS
+ *
+ *   Description:
+ *      Parameter is the arc radius used for
+ *      circular engages and circular retracts.
+ *
+ *   Type: UF_PARAM_type_double_length
+ *
+ *   Name: Engage Retract Auto Radius
+ *  Variable Name: <prefix>_engage_retract_auto_radius
+ *
+ *   Possible Values: positive UF_PARAM_type_double_length
+ *
+ * 
+ */
+#define UF_PARAM_ENGRET_AUTO_RADIUS   216  /* UF_PARAM_type_double_length */
+
+
+/* UF_PARAM_ENGRET_AUTO_ACTIVE_RANGE
+ *
+ *   Description:
+ *      Parameter is the activation range used by
+ *      automatic engages and retracts.
+ *
+ *   Type: UF_PARAM_type_double_length
+ *
+ *   Name: Engage Retract Auto Activation Range
+ *  Variable Name: <prefix>_engage_retract_auto_activation_range
+ *
+ *   Possible Values: UF_PARAM_type_double_length
+ *
+ * 
+ */
+#define UF_PARAM_ENGRET_AUTO_ACTIVE_RANGE   217  /* UF_PARAM_type_double_length */
+
+
+typedef enum
+{
+    UF_PARAM_eng_auto_ramp_method_ramp_on_lines          = 1,
+    UF_PARAM_eng_auto_ramp_method_ramp_on_lines_and_arcs = 2,
+    UF_PARAM_eng_auto_ramp_method_helical_ramping        = 3
+
+} UF_PARAM_eng_auto_ramp_method_t;
+
+
+/* UF_PARAM_ENG_AUTO_RAMP_METHOD
+ *
+ *   Description:
+ *      Parameter denotes the type of ramping
+ *      to be used if automatic engages are active.
+ *
+ *   Type: UF_PARAM_type_int
+ *
+ *   Name: Engage Auto Ramp Method
+ *  Variable Name: <prefix>_engage_auto_ramp_method
+ *
+ *   Possible Values: UF_PARAM_eng_auto_ramp_method_t
+ *
+ * 
+ */
+#define UF_PARAM_ENG_AUTO_RAMP_METHOD   218  /* UF_PARAM_type_int */
+
+
+/* UF_PARAM_ENG_AUTO_RAMP_ANGLE
+ *
+ *   Description:
+ *      Parameter is the ramping angle used by
+ *      automatic engages when ramping is required.
+ *
+ *   Type: UF_PARAM_type_double
+ *
+ *   Name: Engage Auto Ramp Angle
+ *  Variable Name: <prefix>_engage_auto_ramp_angle
+ *
+ *   Possible Values: UF_PARAM_type_double
+ *                    0 < ramp angle < 90
+ *
+ * 
+ */
+#define UF_PARAM_ENG_AUTO_RAMP_ANGLE   219  /* UF_PARAM_type_double */
+
+
+typedef enum
+{
+    UF_PARAM_clrplane_undefined           = 0,
+    UF_PARAM_clrplane_define_and_active   = 1,
+    UF_PARAM_clrplane_define_and_inactive = 2
+
+} UF_PARAM_clrplane_status_t;
+
+
+/* UF_PARAM_CLRPLANE_STATUS
+ *
+ *   Description:
+ *      Parameter is the clearance plane status.
+ *
+ *   Type: UF_PARAM_type_int
+ *
+ *   Name: Clearance Plane Status
+ *  Variable Name: <prefix>_clearance_plane_status
+ *
+ *   Possible Values: UF_PARAM_clrplane_status_t
+ *
+ * 
+ */
+#define UF_PARAM_CLRPLANE_STATUS   220  /* UF_PARAM_type_int */
+
+
+typedef enum
+{
+    UF_PARAM_clrplane_usage_at_operation_start_and_end    = 1,
+    UF_PARAM_clrplane_usage_at_operation_start_only       = 2,
+    UF_PARAM_clrplane_usage_at_operation_end_only         = 3,
+    UF_PARAM_clrplane_usage_at_start_min_clearance_at_end = 4,
+    UF_PARAM_clrplane_usage_at_end_min_clearance_at_start = 5
+
+} UF_PARAM_clrplane_usage_t;
+
+
+/* UF_PARAM_CLRPLANE_USAGE
+ *
+ *   Description:
+ *      Parameter denotes when a move to or from the
+ *      clearance plane is to be made. (Parameter is not
+ *      used unless UF_PARAM_CLRPLANE_STATUS is 1.)
+ *
+ *   Type: UF_PARAM_type_int
+ *
+ *   Name: Clearance Plane Usage
+ *  Variable Name: <prefix>_clearance_plane_usage
+ *
+ *   Possible Values: UF_PARAM_clrplane_usage_t
+ *
+ * 
+ */
+#define UF_PARAM_CLRPLANE_USAGE   221  /* UF_PARAM_type_int */
+
+
+/* UF_PARAM_ENG_AUTO_MIN_RAMP_LENGTH
+ *
+ *   Description:
+ *      Parameter is the minimum ramp length
+ *      used by automatic engages when ramping 
+ *      is required.  
+ *
+ *   Type: UF_PARAM_type_double
+ *
+ *   Name: Engage Auto Minimum Ramp Length
+ *  Variable Name: <prefix>_engage_auto_minimum_ramp_length
+ *
+ *   Possible Values: positive UF_PARAM_type_double
+ *
+ * 
+ */
+#define UF_PARAM_ENG_AUTO_MIN_RAMP_LENGTH   224  /* UF_PARAM_type_double */
+
+
+/* UF_PARAM_ENG_AUTO_HELICAL_DIAMETER
+ *
+ *   Description:
+ *      Parameter is the helical diameter, presented as 
+ *      percentage 0f tool diameter,
+ *      used by automatic engages when helical ramping 
+ *      is required.  
+ *
+ *   Type: UF_PARAM_type_double
+ *
+ *   Name: Engage Auto Helical Diameter
+ *  Variable Name: <prefix>_engage_auto_helical_diameter
+ *
+ *   Possible Values: positive UF_PARAM_type_double
+ *
+ * 
+ */
+#define UF_PARAM_ENG_AUTO_HELICAL_DIAMETER   225  /* UF_PARAM_type_double */
+
+
+typedef enum
+{
+    UF_PARAM_lwplane_status_undefined            = 0,
+    UF_PARAM_lwplane_status_defined_and_active   = 1,
+    UF_PARAM_lwplane_status_defined_and_inactive = 2
+
+} UF_PARAM_lwplane_status_t;
+

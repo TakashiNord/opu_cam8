@@ -1,0 +1,96 @@
+
+typedef enum
+{
+    UF_PARAM_cut_dir_undefined,
+    UF_PARAM_cut_dir_climb,
+    UF_PARAM_cut_dir_conventional
+ 
+} UF_PARAM_cut_dir_type_t;
+
+
+/* UF_PARAM_CUT_DIR_TYPE
+ *
+ *   Description:
+ *      This parameter specifies cut direction type
+ *
+ *   Type: UF_PARAM_type_int
+ *
+ *   Name: Cut Direction Type
+ *  Variable Name: <prefix>_cut_direction_type
+ *
+ *   Possible Values: UF_PARAM_cut_dir_type_t
+ *
+ * 
+ */
+// #define UF_PARAM_CUT_DIR_TYPE   405  /* UF_PARAM_type_int */
+
+/*
+Cut Flag             Conventional
+Cut Direction Flag   Climb
+Cut Direction        Forward
+
+typedef enum
+    {
+        UF_PARAM_dpmrc_bnd_dir_forward,
+        UF_PARAM_dpmrc_bnd_dir_backward
+    } UF_PARAM_dpmrc_bnd_dir_t;
+*/
+
+/* UF_PARAM_DPMRC_BOUNDARY_DIR
+ *
+ *   Description:
+ *      This parameter specifies the boundary direction in the radial cut drive method
+ *      (dpmrc).
+ *
+ *   Type: UF_PARAM_type_int
+ *
+ *   Name: DPMRC Boundary Dir
+ *  Variable Name: <prefix>_dpmrc_boundary_dir
+ *
+ *   Possible Values: UF_PARAM_dpmrc_bnd_dir_t
+ *
+ * 
+ */
+//#define UF_PARAM_DPMRC_BOUNDARY_DIR   1751  /* Param_type_int */
+
+
+/* UF_PARAM_DPMRC_BOUNDARY_RIGHT
+ *
+ *   Description:
+ *      This parameter specifies how far the radial cut goes to the right side of
+ *      the boundary in the radial cut drive method (dpmrc). This may also
+ *      be called the right side band width.
+ *
+ *   Type: UF_PARAM_type_double
+ *
+ *   Name: DPMRC Boundary Right
+ *  Variable Name: <prefix>_dpmrc_boundary_right
+ *
+ *   Possible Values:
+ *             double
+ *
+ * 
+ */
+//#define UF_PARAM_DPMRC_BOUNDARY_RIGHT   1753 
+
+
+/* UF_PARAM_DPMRC_BOUNDARY_LEFT
+ *
+ *   Description:
+ *      This parameter specifies how far the radial cut goes to the left side of
+ *      the boundary in the radial cut drive method (dpmrc). This may also
+ *      be called the left side band width.
+ *
+ *   Type: UF_PARAM_type_double
+ *
+ *   Name: DPMRC Boundary Left
+ *  Variable Name: <prefix>_dpmrc_boundary_left
+ *
+ *   Possible Values:
+ *             double
+ *
+ * 
+ */
+//#define UF_PARAM_DPMRC_BOUNDARY_LEFT   1754 
+
+
